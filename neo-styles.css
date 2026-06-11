@@ -4,6 +4,106 @@
   box-sizing: border-box;
 }
 
+/* ── Neo-Brutalist Custom Cursor ───────────────────────────────────────── */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+
+  #cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 10px; height: 10px;
+    background: #000;
+    border: 2px solid #000;
+    pointer-events: none;
+    z-index: 999999;
+    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, opacity 0.2s ease;
+    will-change: transform;
+    mix-blend-mode: difference;
+  }
+
+  #cursor-follower {
+    position: fixed;
+    top: 0; left: 0;
+    width: 36px; height: 36px;
+    background: #ffd93d;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    pointer-events: none;
+    z-index: 999998;
+    transition:
+      width 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      height 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.2s ease,
+      box-shadow 0.15s ease,
+      border-color 0.15s ease,
+      opacity 0.2s ease;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Crosshair icon inside follower — hidden by default */
+  #cursor-follower::before,
+  #cursor-follower::after {
+    content: '';
+    position: absolute;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  #cursor-follower::before { width: 2px; height: 14px; }
+  #cursor-follower::after  { width: 14px; height: 2px; }
+
+  /* ── Hover state ── */
+  #cursor-dot.cursor-hover {
+    width: 6px; height: 6px;
+    background: #fff;
+  }
+  #cursor-follower.cursor-hover {
+    width: 52px; height: 52px;
+    background: #66d9ef;
+    border-color: #000;
+    box-shadow: 6px 6px 0 #000;
+  }
+  #cursor-follower.cursor-hover::before,
+  #cursor-follower.cursor-hover::after {
+    opacity: 1;
+  }
+
+  /* ── Click state ── */
+  #cursor-dot.cursor-click {
+    width: 8px; height: 8px;
+    background: #ff6b9d;
+  }
+  #cursor-follower.cursor-click {
+    width: 28px; height: 28px;
+    background: #ffd93d;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  /* ── Dark mode ── */
+  #cursor-dot[data-theme="dark"] {
+    background: #a8e6cf;
+    border-color: #a8e6cf;
+  }
+  #cursor-follower[data-theme="dark"] {
+    background: #ffd93d;
+    border-color: #a8e6cf;
+    box-shadow: 4px 4px 0 #a8e6cf;
+  }
+  #cursor-follower[data-theme="dark"]::before,
+  #cursor-follower[data-theme="dark"]::after {
+    background: #1a1a1a;
+  }
+  #cursor-follower[data-theme="dark"].cursor-hover {
+    background: #66d9ef;
+    border-color: #a8e6cf;
+    box-shadow: 6px 6px 0 #a8e6cf;
+  }
+}
+/* ──────────────────────────────────────────────────────────────────────── */
+
 html {
   scroll-behavior: smooth;
 }
