@@ -94,9 +94,6 @@
     </script>
 </head>
 <body>
-    <!-- Custom Neo-Brutalist Cursor -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-follower"></div>
     <!-- Awwwards Ribbon -->
     <div id="awwwards" style="position: fixed; z-index: 999; top: 30%; right: -3px; transform: translateY(-50%) scale(0.7); transform-origin: right center;">
         <a href="https://github.com/DevPatel1102" target="_blank" style="display: block; text-decoration: none;">
@@ -1329,73 +1326,6 @@
         window.addEventListener('scroll', updateProgressBar);
         window.addEventListener('resize', updateProgressBar);
         updateProgressBar();
-        // ── Neo-Brutalist Custom Cursor ────────────────────────────────
-        (function() {
-            // Disable on touch devices
-            if (window.matchMedia('(pointer: coarse)').matches) return;
-
-            const dot      = document.getElementById('cursor-dot');
-            const follower = document.getElementById('cursor-follower');
-
-            let mouseX = 0, mouseY = 0;
-            let followerX = 0, followerY = 0;
-
-            // Hide default cursor on the whole page
-            document.documentElement.style.cursor = 'none';
-
-            // Track mouse — dot follows instantly
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-            });
-
-            // Smooth follower with easing
-            function animateFollower() {
-                followerX += (mouseX - followerX) * 0.12;
-                followerY += (mouseY - followerY) * 0.12;
-                follower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
-                requestAnimationFrame(animateFollower);
-            }
-            animateFollower();
-
-            // Interactive targets
-            const hoverSel = 'a, button, .skill-box, .contact-card, .creator-item, .timeline-item-flat, .tech-badge, .tag, .nav-cta, .social-btn, .btn-cta, .creator-github, .checkpoint';
-
-            document.addEventListener('mouseover', (e) => {
-                if (e.target.closest(hoverSel)) {
-                    follower.classList.add('cursor-hover');
-                    dot.classList.add('cursor-hover');
-                }
-            });
-            document.addEventListener('mouseout', (e) => {
-                if (e.target.closest(hoverSel)) {
-                    follower.classList.remove('cursor-hover');
-                    dot.classList.remove('cursor-hover');
-                }
-            });
-
-            // Click squeeze
-            document.addEventListener('mousedown', () => {
-                follower.classList.add('cursor-click');
-                dot.classList.add('cursor-click');
-            });
-            document.addEventListener('mouseup', () => {
-                follower.classList.remove('cursor-click');
-                dot.classList.remove('cursor-click');
-            });
-
-            // Hide when leaving window
-            document.addEventListener('mouseleave', () => { dot.style.opacity='0'; follower.style.opacity='0'; });
-            document.addEventListener('mouseenter', () => { dot.style.opacity='1'; follower.style.opacity='1'; });
-
-            // Sync dark mode
-            new MutationObserver(() => {
-                const dark = document.body.getAttribute('data-theme') === 'dark';
-                [dot, follower].forEach(el => el.setAttribute('data-theme', dark ? 'dark' : 'light'));
-            }).observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
-        })();
-        // ─────────────────────────────────────────────────────────────────
 
     </script>
 </body>

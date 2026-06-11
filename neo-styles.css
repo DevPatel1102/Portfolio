@@ -5,101 +5,33 @@
 }
 
 /* ── Neo-Brutalist Custom Cursor ───────────────────────────────────────── */
+/*
+  Two cursor states (desktop/mouse only — disabled on touch via pointer: fine):
+  1. Arrow  — yellow #ffd93d body, black #000 stroke + hard shadow  → default
+  2. Hand   — cyan  #66d9ef body, black #000 stroke + hard shadow  → links & buttons
+*/
 @media (pointer: fine) {
-  * { cursor: none !important; }
 
-  #cursor-dot {
-    position: fixed;
-    top: 0; left: 0;
-    width: 10px; height: 10px;
-    background: #000;
-    border: 2px solid #000;
-    pointer-events: none;
-    z-index: 999999;
-    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, opacity 0.2s ease;
-    will-change: transform;
-    mix-blend-mode: difference;
+  /* ── Default arrow cursor ── */
+  * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M3 2L3 21L7.5 16.5L10.5 24L13 23L10 15.5L15.5 15.5Z' fill='%23000' transform='translate(2.5 2.5)'/%3E%3Cpath d='M3 2L3 21L7.5 16.5L10.5 24L13 23L10 15.5L15.5 15.5Z' fill='%23ffd93d' stroke='%23000' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 3 2, auto !important;
   }
 
-  #cursor-follower {
-    position: fixed;
-    top: 0; left: 0;
-    width: 36px; height: 36px;
-    background: #ffd93d;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0 #000;
-    pointer-events: none;
-    z-index: 999998;
-    transition:
-      width 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-      height 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-      background 0.2s ease,
-      box-shadow 0.15s ease,
-      border-color 0.15s ease,
-      opacity 0.2s ease;
-    will-change: transform;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* ── Pointer hand cursor for interactive elements ── */
+  a, button, [role="button"],
+  .skill-box, .contact-card, .creator-item,
+  .timeline-item-flat, .tech-badge, .tag,
+  .social-btn, .btn-cta, .creator-github,
+  .checkpoint, .nav-cta, .nav-brand, .nav-link,
+  .theme-toggle-nav, label, select, input[type="submit"],
+  input[type="button"], input[type="checkbox"] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M8 1L8 13L5.5 12C3 12 3 14 3 14L3 21C3 23.5 5 25.5 7.5 25.5L14.5 25.5C17 25.5 18 23.5 18 21L18 14C18 12.5 16.5 12 15 12L13 12L13 5C13 3 11.5 2 10.5 2C10.5 1 9.5 1 8.5 1Z' fill='%23000' transform='translate(2 2)'/%3E%3Cpath d='M8 1L8 13L5.5 12C3 12 3 14 3 14L3 21C3 23.5 5 25.5 7.5 25.5L14.5 25.5C17 25.5 18 23.5 18 21L18 14C18 12.5 16.5 12 15 12L13 12L13 5C13 3 11.5 2 10.5 2C10.5 1 9.5 1 8.5 1Z' fill='%2366d9ef' stroke='%23000' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 8 1, pointer !important;
   }
 
-  /* Crosshair icon inside follower — hidden by default */
-  #cursor-follower::before,
-  #cursor-follower::after {
-    content: '';
-    position: absolute;
-    background: #000;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-  }
-  #cursor-follower::before { width: 2px; height: 14px; }
-  #cursor-follower::after  { width: 14px; height: 2px; }
-
-  /* ── Hover state ── */
-  #cursor-dot.cursor-hover {
-    width: 6px; height: 6px;
-    background: #fff;
-  }
-  #cursor-follower.cursor-hover {
-    width: 52px; height: 52px;
-    background: #66d9ef;
-    border-color: #000;
-    box-shadow: 6px 6px 0 #000;
-  }
-  #cursor-follower.cursor-hover::before,
-  #cursor-follower.cursor-hover::after {
-    opacity: 1;
-  }
-
-  /* ── Click state ── */
-  #cursor-dot.cursor-click {
-    width: 8px; height: 8px;
-    background: #ff6b9d;
-  }
-  #cursor-follower.cursor-click {
-    width: 28px; height: 28px;
-    background: #ffd93d;
-    box-shadow: 2px 2px 0 #000;
-  }
-
-  /* ── Dark mode ── */
-  #cursor-dot[data-theme="dark"] {
-    background: #a8e6cf;
-    border-color: #a8e6cf;
-  }
-  #cursor-follower[data-theme="dark"] {
-    background: #ffd93d;
-    border-color: #a8e6cf;
-    box-shadow: 4px 4px 0 #a8e6cf;
-  }
-  #cursor-follower[data-theme="dark"]::before,
-  #cursor-follower[data-theme="dark"]::after {
-    background: #1a1a1a;
-  }
-  #cursor-follower[data-theme="dark"].cursor-hover {
-    background: #66d9ef;
-    border-color: #a8e6cf;
-    box-shadow: 6px 6px 0 #a8e6cf;
+  /* ── Text cursor stays default for inputs ── */
+  input[type="text"], input[type="email"],
+  input[type="password"], textarea {
+    cursor: text !important;
   }
 }
 /* ──────────────────────────────────────────────────────────────────────── */
