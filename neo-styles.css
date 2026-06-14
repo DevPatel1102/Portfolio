@@ -3498,7 +3498,32 @@ body[data-theme="dark"] .language-item:hover {
   gap: 2.5rem;
   max-width: 750px;
   margin: 0 auto;
+  justify-items: center;
 }
+
+.creator-item-centered {
+  grid-column: 1 / -1;
+  max-width: 340px;
+}
+
+/* Resume Download Button */
+.hero-cta-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-resume {
+  background: var(--cyan) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-resume:hover {
+  background: #4fc4db !important;
+}
+
 
 .creator-item {
   display: grid;
